@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinela Serviços - Agendamento de Entrevista</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #1a4b8c;
+            margin-bottom: 5px;
+        }
+        h3 {
+            color: #444;
+            margin-top: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+        .endereco {
+            background-color: #eef5fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1a4b8c;
+        }
+        .radio-group {
+            margin-bottom: 15px;
+        }
+        .radio-group label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        button {
+            background-color: #1a4b8c;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #123461;
+        }
+        .btn-curso {
+            background-color: #28a745;
+            display: none; /* Fica escondido até o candidato marcar "Não" */
+        }
+        .btn-curso:hover {
+            background-color: #218838;
+        }
+        .mensagem {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .sucesso {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        .erro {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Sentinela serviços</h1>
+
+    <h3>Horário disponível pra entrevista</h3>
+    <div class="radio-group" id="horarios">
+        <label>
+            <input type="radio" name="horario" value="quinta_11"> 
+            Próxima quinta-feira às 11 horas
+        </label>
+        <label>
+            <input type="radio" name="horario" value="quinta_15"> 
+            Próxima quinta-feira às 15 horas
+        </label>
+        <label>
+            <input type="radio" name="horario" value="sexta_14"> 
+            Próxima sexta-feira às 14 horas
+        </label>
+    </div>
+
+    <div class="endereco">
+        <strong>Endereço da entrevista:</strong><br>
+        Av. Alberto Torres, 371 - Centro, Campos dos Goytacazes - RJ, 28035-581
+    </div>
+
+    <h3>Confira se possui certificado de porteiro nível 7 atualizado:</h3>
+    <div class="radio-group" id="certificados">
+        <label>
+            <input type="radio" name="certificado" value="sim"> 
+            Sim
+        </label>
+        <label>
+            <input type="radio" name="certificado" value="nao"> 
+            Não
+        </label>
+    </div>
+
+    <button onclick="agendarEntrevista()">Agendar entrevista</button>
+
+    <div id="mensagem-resultado" class="mensagem"></div>
+    <button id="btn-curso" class="btn-curso" onclick="alert('Redirecionando para o curso gratuito...')">Faça seu curso gratuitamente</button>
+</div>
+
+<script>
+    function agendarEntrevista() {
+        const horarioSelecionado = document.querySelector('input[name="horario"]:checked');
+        const certificadoSelecionado = document.querySelector('input[name="certificado"]:checked');
+        const caixaMensagem = document.getElementById('mensagem-resultado');
+        const botaoCurso = document.getElementById('btn-curso');
+
+        // Limpa as mensagens anteriores
+        caixaMensagem.className = 'mensagem';
+        botaoCurso.style.display = 'none';
+
+        // Valida se tudo foi preenchido
+        if (!horarioSelecionado || !certificadoSelecionado) {
+            caixaMensagem.textContent = 'Por favor, selecione um horário e marque se possui o certificado.';
+            caixaMensagem.classList.add('erro');
+            return;
+        }
+
+        // Lógica de agendamento baseada no certificado
+        if (certificadoSelecionado.value === 'sim') {
+            caixaMensagem.textContent = 'Entrevista agendada com sucesso!';
+            caixaMensagem.classList.add('sucesso');
+        } else {
+            caixaMensagem.textContent = 'Atenção: A mulher que te atendeu informa que o curso é imprescindível para a vaga.';
+            caixaMensagem.classList.add('erro');
+            botaoCurso.style.display = 'block'; // Mostra o botão do curso gratuito
+        }
+    }
+</script>
+
+</body>
+</html>
