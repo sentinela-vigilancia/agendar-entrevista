@@ -1,3 +1,6 @@
+Aqui está o código atualizado com as opções de vagas incluídas e a frase de aviso corrigida, mantendo toda a estrutura original intacta:
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -46,6 +49,13 @@
             display: block;
             margin-bottom: 10px;
             cursor: pointer;
+            line-height: 1.5;
+        }
+        .vaga-detalhes {
+            margin-left: 25px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #555;
         }
         button {
             background-color: #1a4b8c;
@@ -95,6 +105,45 @@
 <div class="container">
     <h1>Sentinela serviços</h1>
 
+    <h3>Escolha a vaga de interesse</h3>
+    <div class="radio-group" id="vagas">
+        <label>
+            <input type="radio" name="vaga" value="ilha_bela"> 
+            <strong>Portaria condomínio Ilha Bela</strong>
+        </label>
+        <div class="vaga-detalhes">
+            <strong>Endereço:</strong> Av. Pres. Vargas, 473/483 - Campos dos Goytacazes RJ<br>
+            <strong>Escala:</strong> 12x36 (Trabalha um dia e folga o outro)<br>
+            <strong>Salário:</strong> R$ 2.350,00<br>
+            <strong>Benefícios:</strong> Cesta básica, Vale transporte (até 3 passagens por dia), Vale refeição 590,67, Convênio médico, Registro em carteira.<br>
+            <strong>Início das atividades:</strong> 02/09/2026
+        </div>
+
+        <label>
+            <input type="radio" name="vaga" value="abrolhos"> 
+            <strong>Portaria condomínio Parque Abrolhos</strong>
+        </label>
+        <div class="vaga-detalhes">
+            <strong>Endereço:</strong> Av. Pres. Vargas, 415 - Pecuária, Campos dos Goytacazes - RJ<br>
+            <strong>Escala:</strong> 12x36 (Trabalha um dia e folga o outro)<br>
+            <strong>Salário:</strong> R$ 2.350,00<br>
+            <strong>Benefícios:</strong> Cesta básica, Vale transporte (até 3 passagens por dia), Vale refeição 590,67, Convênio médico, Registro em carteira.<br>
+            <strong>Início das atividades:</strong> 24/08/2026
+        </div>
+
+        <label>
+            <input type="radio" name="vaga" value="jatobas"> 
+            <strong>Portaria condomínio Jardim Jatobás</strong>
+        </label>
+        <div class="vaga-detalhes">
+            <strong>Endereço:</strong> R. Vicente de Carvalho, Av. Jardins de Campos, 42, Campos dos Goytacazes - RJ, 28085-760<br>
+            <strong>Escala:</strong> 12x36 (Trabalha um dia e folga o outro)<br>
+            <strong>Salário:</strong> R$ 2.350,00<br>
+            <strong>Benefícios:</strong> Cesta básica, Vale transporte (até 3 passagens por dia), Vale refeição 590,67, Convênio médico, Registro em carteira.<br>
+            <strong>Início das atividades:</strong> 07/09/2026
+        </div>
+    </div>
+
     <h3>Horário disponível pra entrevista</h3>
     <div class="radio-group" id="horarios">
         <label>
@@ -136,6 +185,7 @@
 
 <script>
     function agendarEntrevista() {
+        const vagaSelecionada = document.querySelector('input[name="vaga"]:checked');
         const horarioSelecionado = document.querySelector('input[name="horario"]:checked');
         const certificadoSelecionado = document.querySelector('input[name="certificado"]:checked');
         const caixaMensagem = document.getElementById('mensagem-resultado');
@@ -146,8 +196,8 @@
         botaoCurso.style.display = 'none';
 
         // Valida se tudo foi preenchido
-        if (!horarioSelecionado || !certificadoSelecionado) {
-            caixaMensagem.textContent = 'Por favor, selecione um horário e marque se possui o certificado.';
+        if (!vagaSelecionada || !horarioSelecionado || !certificadoSelecionado) {
+            caixaMensagem.textContent = 'Por favor, selecione uma vaga, um horário e marque se possui o certificado.';
             caixaMensagem.classList.add('erro');
             return;
         }
@@ -157,7 +207,7 @@
             caixaMensagem.textContent = 'Entrevista agendada com sucesso!';
             caixaMensagem.classList.add('sucesso');
         } else {
-            caixaMensagem.textContent = 'Atenção: A mulher que te atendeu informa que o curso é imprescindível para a vaga.';
+            caixaMensagem.textContent = 'Para essa vaga o curso de porteiro nivel 7 é indispensavel';
             caixaMensagem.classList.add('erro');
             botaoCurso.style.display = 'block'; // Mostra o botão do curso gratuito
         }
@@ -166,3 +216,5 @@
 
 </body>
 </html>
+
+```
